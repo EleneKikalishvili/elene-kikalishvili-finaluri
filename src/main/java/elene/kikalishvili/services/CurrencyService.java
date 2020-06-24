@@ -9,19 +9,31 @@ import java.util.List;
 
 @WebService
 public class CurrencyService {
+  public   List<Currency> currencyList=new ArrayList<Currency>();
     public List<Currency> getCurrencies(){
-        List<Currency> currencyList=new ArrayList<Currency>();
-        currencyList.add(new Currency("10
-                ესტორნური კრონი", 1.0754));
+        currencyList.add(new Currency(1.0754, "jsjsds"));
         return currencyList;
     }
 
     @WebMethod
-    public Currency getCurrency(){
-        return new Currency(1,"zura",24);
+    public Currency getCurrency(Double cur) throws Exception {
+        for (Currency i : currencyList) {
+            if (i.getCur().equals(cur)) {
+                return i;
+            }
+        }
+
+        throw new Exception("error message");
     }
+
     @WebMethod
-    public void getCurrencyDescription(Currency currency){
-        System.out.println(currency);
+    public String getCurrencyDescription(Double cur) throws Exception {
+        for (Currency i : currencyList) {
+            if (i.getCur().equals(cur)) {
+                return i.getDescription();
+            }
+        }
+
+        throw new Exception("error message");
     }
 }
